@@ -2,8 +2,13 @@
 default:
     image: gradle:8.0.2-jdk17-alpine
 
-variables:
-    user: beb97
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
 
 stages:
     - test
@@ -17,11 +22,18 @@ test-app :
         - ./gradlew check
 
 build-app :
-    stage: build
-    script: 
-        - echo "hello build"
-        - ./gradlew build
+  stage: build
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
 
 deploy-app :
     stage: deploy
-    script: echo "hello deploy"
+    script: 
+        - echo "hello deploy"
+        - ./deploy
