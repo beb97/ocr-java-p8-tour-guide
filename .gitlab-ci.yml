@@ -16,7 +16,7 @@ stages:
 build-app :
   stage: build
   script:
-    - sh gradlew assemble
+    - sh gradlew assemble --stacktrace --debug
   cache:
     paths:
     - .gradle/caches
