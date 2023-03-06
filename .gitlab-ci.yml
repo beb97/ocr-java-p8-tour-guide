@@ -1,4 +1,10 @@
 
+default:
+    image: gradle:8.0.2-jdk17-alpine
+
+variables:
+    user: beb97
+
 stages:
     - test
     - build
@@ -6,11 +12,15 @@ stages:
 
 test-app :
     stage: test
-    script: echo "hello testing"
+    script: 
+        - echo "hello testing"
+        - ./gradlew check
 
 build-app :
     stage: build
-    script: echo "hello build"
+    script: 
+        - echo "hello build"
+        - ./gradlew build
 
 deploy-app :
     stage: deploy
