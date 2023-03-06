@@ -12,8 +12,8 @@ cache:
     - .gradle/caches
 
 stages:
-    - test
     - build
+    - test
     - deploy
 
 test-app :
