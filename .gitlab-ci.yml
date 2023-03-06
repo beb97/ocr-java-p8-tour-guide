@@ -3,11 +3,10 @@ default:
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  GRADLE_USER_HOME: ~/.gradle
 
 before_script:
   - chmod +x gradlew
-  - mkdir .gradle
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
     - build
@@ -18,6 +17,9 @@ build-app :
   stage: build
   script:
     - sh gradlew assemble
+  cache:
+    paths:
+    - .gradle/caches
 
 test-app :
     stage: test
