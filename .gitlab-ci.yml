@@ -25,7 +25,7 @@ test-app :
 build-app :
   stage: build
   script:
-    - ./gradlew assemble
+    - ./gradlew bootJar
   artifacts:
     paths:
       - build/libs/*.jar
