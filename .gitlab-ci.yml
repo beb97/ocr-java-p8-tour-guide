@@ -1,1 +1,17 @@
 
+stages:
+    - test
+    - build
+    - deploy
+
+test-app :
+    stage: test
+    script: echo "hello testing"
+
+build-app :
+    stage: build
+    script: echo "hello build"
+
+deploy-app :
+    stage: deploy
+    script: echo "hello deploy"
