@@ -1,36 +1,28 @@
-
 default:
     image: gradle:8.0.2-jdk17-alpine
 
-before_script:
-  - export GRADLE_USER_HOME=`pwd`/.gradle
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
+before_script:
+  - chmod +x gradlew
 
 stages:
-    - test
     - build
+    - test
     - deploy
+
+build-app :
+  stage: build
+  script:
+    - sh gradlew assemble
 
 test-app :
     stage: test
     script: 
         - echo "hello testing"
-        - ./gradlew check
+        - ./gradlew check --stacktrace
 
-build-app :
-  stage: build
-  script:
-    - ./gradlew assemble
-  artifacts:
-    paths:
-      - build/libs/*.jar
-    expire_in: 1 week
-  only:
-    - master
 
 deploy-app :
     stage: deploy
