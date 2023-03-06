@@ -20,16 +20,17 @@ stages:
     - test
     - deploy
 
+build-app :
+  stage: build
+  script:
+    - sh gradlew assemble
+    
 test-app :
     stage: test
     script: 
         - echo "hello testing"
         - ./gradlew check --stacktrace
 
-build-app :
-  stage: build
-  script:
-    - ./gradlew assemble
 
 deploy-app :
     stage: deploy
