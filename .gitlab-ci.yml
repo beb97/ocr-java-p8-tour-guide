@@ -20,7 +20,7 @@ test-app :
     stage: test
     script: 
         - echo "hello testing"
-        - ./gradlew check
+        - ./gradlew check --stacktrace
 
 build-app :
   stage: build
