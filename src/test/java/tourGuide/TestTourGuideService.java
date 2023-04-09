@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -20,6 +22,13 @@ import tourGuide.user.User;
 import tripPricer.Provider;
 
 public class TestTourGuideService {
+
+	// TO PREVENT :
+//	java.lang.NumberFormatException: For input string: "102,959072"
+	@Before
+	public void setUp() throws Exception {
+		Locale.setDefault(Locale.US);
+	}
 
 	@Test
 	public void getUserLocation() {
